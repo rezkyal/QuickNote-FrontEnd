@@ -1,11 +1,19 @@
-.Header{
-    align-items: flex-start
+.header{
+    justify-content: space-between;
+    display: flex;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 
-.TitleFont{
+.title-font{
     font-family: 'Pacifico', cursive;
     font-size: 30px;
     color: black
 }
+
+.cancel-set{
+    margin-right: 10px;
+    background-color: #77dd77;
+    color: white;
+}
+

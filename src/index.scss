@@ -11,28 +11,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-
-.white-font{
-  color: white
-}
-
-.bg-powder-blue {
-  background-color: #AEDDE0;
-}
-
-.bg-light-steel-blue {
-  background-color: #CCE0DA;
-}
-
-.bg-black {
-  background-color: black;
-}
-
-.bg-dark-gray{
-  background-color: #444444;
-}
-
-@import "~normalize.css";
-@import "~@blueprintjs/core/lib/css/blueprint.css";
-@import "~@blueprintjs/icons/lib/css/blueprint-icons.css";

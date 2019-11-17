@@ -4,3 +4,58 @@
   height: 100%;
 }
 
+.white-font{
+  color: white
+}
+
+.bg-powder-blue {
+  background-color: #AEDDE0;
+}
+
+.bg-light-steel-blue {
+  background-color: #CCE0DA;
+}
+
+.bg-black {
+  background-color: black;
+}
+
+.bg-dark-gray{
+  background-color: #444444;
+}
+
+.red-pastel-hoverable{
+  background-color: #FF6961;
+}
+
+.red-pastel-hoverable:hover{
+  background-color: red;
+}
+
+.green-pastel-hoverable{
+  background-color: #77dd77;
+}
+
+.green-pastel-hoverable:hover{
+  background-color: green;
+}
+
+.purple-pastel-hoverable{
+  background-color: #b19cd9;
+}
+
+.purple-pastel-hoverable:hover{
+  background-color: purple;
+}
+
+.grey-pastel-hoverable{
+  background-color: #cfcfc4;
+}
+
+.grey-pastel-hoverable:hover{
+  background-color: grey;
+}
+
+@import "~normalize.css";
+@import "~@blueprintjs/core/lib/css/blueprint.css";
+@import "~@blueprintjs/icons/lib/css/blueprint-icons.css";

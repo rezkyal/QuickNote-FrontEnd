@@ -14,15 +14,15 @@ export default class NoteDetail extends React.Component{
                         popoverClassName={Classes.POPOVER_CONTENT_SIZING}
                         position="auto"
                     >
-                        <Button icon="trash" className="delete-note">Delete note</Button>
-                        <div key="text">
+                        <Button icon="trash" className="delete-note red-pastel-hoverable">Delete note</Button>
+                        <div>
                             <H5>Confirm deletion</H5>
-                            <p>Are you sure you want to delete these items? You won't be able to recover them.</p>
+                            <p>Are you sure you want to delete these note? You won't be able to recover them.</p>
                             <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 15 }}>
-                                <Button className="cancel-delete-note">
+                                <Button className={"cancel-delete-note grey-pastel-hoverable "+Classes.POPOVER_DISMISS}>
                                     Cancel
                                 </Button>
-                                <Button className="delete-note">
+                                <Button className="delete-note red-pastel-hoverable">
                                     Delete
                                 </Button>
                             </div>

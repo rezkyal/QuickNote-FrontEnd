@@ -32,7 +32,7 @@ export default class NoteList extends React.Component {
                         className="search-field"
                     />
                     <Button
-                        className="add-note"
+                        className="add-note green-pastel-hoverable"
                         icon="add"
                     >
                         Add new note
