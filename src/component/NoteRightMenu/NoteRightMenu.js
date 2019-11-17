@@ -1,8 +1,10 @@
 import React from 'react'
-import './NoteDetail.scss'
-import Button from './../Button/Button'
+import './NoteRightMenu.scss'
+import Button from '../Button/Button'
 import {Popover,H5,Classes} from '@blueprintjs/core'
-export default class NoteDetail extends React.Component{
+
+
+export default class NoteRightMenu extends React.Component{
     render(){
         return(
             <div className="main-frame">

@@ -11,7 +11,7 @@ const Button = (props) =>{
         )
     }
     return (
-        <button className={className}>
+        <button {...props} className={className}>
             {iconName}
             <span className="custom-button-text">{props.children}</span>
         </button>

@@ -1,49 +1,27 @@
 import React from 'react'
-import {InputGroup,Spinner,Icon} from '@blueprintjs/core'
-import Button from './../Button/Button'
 import './NoteList.scss'
+import '../NoteCard/NoteCard'
+import { connect } from "react-redux";
 import NoteCard from '../NoteCard/NoteCard';
+import {getNotes} from '../../redux/selectors'
 
 
-export default class NoteList extends React.Component {
-    state = {
-        filterValue:""
-    }
+const NoteList = ({notes}) => {
+    return(
+    <div className="body-note-list">
+        {notes && notes.length
+        ? notes.map((notes, index) => {
+            return <NoteCard key={notes.id} notes={notes} />;
+            })
+        : "List empty, create one by pressing Add New Note button!"}
+    </div>
+)}
 
-    handleFilterChange = filterValue => {
-        this.setState({ filterValue:filterValue.target.value })
-        console.log(filterValue.target.value)
-    };
 
-    render(){
-        const {filterValue} = this.state
-        const maybeSpinner = filterValue ? <Spinner size={Icon.SIZE_STANDARD} /> : undefined;
-        return(
-            <div className="note-list">
-                <p className="note-list-title">Note Group</p>
-                <div className="header-note-list">
-                    <InputGroup
-                        leftIcon="search"
-                        onChange={this.handleFilterChange}
-                        placeholder="Search..."
-                        rightElement={maybeSpinner}
-                        value={filterValue}
-                        minimal={true}
-                        className="search-field"
-                    />
-                    <Button
-                        className="add-note green-pastel-hoverable"
-                        icon="add"
-                    >
-                        Add new note
-                    </Button>
-                </div>
-                <div className="body-note-list">
-                    <NoteCard/>
-                    <NoteCard/>
-                    <NoteCard/>
-                </div>
-            </div>
-        )
-    }
+const mapStateToProps = state => {
+    const notes = getNotes(state);
+    console.log(notes)
+    return {notes}
 }
+
+export default connect(mapStateToProps)(NoteList);
