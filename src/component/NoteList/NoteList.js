@@ -1,5 +1,6 @@
 import React from 'react'
-import {InputGroup,Spinner,Icon, Button} from '@blueprintjs/core'
+import {InputGroup,Spinner,Icon} from '@blueprintjs/core'
+import Button from './../Button/Button'
 import './NoteList.scss'
 import NoteCard from '../NoteCard/NoteCard';
 
@@ -32,9 +33,7 @@ export default class NoteList extends React.Component {
                     />
                     <Button
                         className="add-note"
-                        intent="success"
                         icon="add"
-                        minimal={true}
                     >
                         Add new note
                     </Button>

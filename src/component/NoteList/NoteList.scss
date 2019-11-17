@@ -2,7 +2,7 @@
     display: inline;
     flex: 1;
     padding: 20px 10px 10px;
-    background-color: #eeeeee
+    background-color: white;
 }
 
 .header-note-list{
@@ -16,6 +16,7 @@
     margin-left: 5px;
     flex: 1;
     background-color: #77dd77;
+    color: white;
 }
 
 .search-field{
@@ -25,5 +26,5 @@
 .body-note-list{
     margin-top: 10px;
     height: 85vh;
-    overflow-y: scroll 
+    overflow-y: auto;
 }

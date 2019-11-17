@@ -2,20 +2,20 @@
     display: inline;
     flex: 2;
     padding: 20px 20px 10px;
+    background-color: white;
+    margin-left: 10px;
+    
 }
 
 .note-title{
     width: 100%;
     outline: 0;
     border-width: 0 0 2px;
-    border-color: white;
+    border-color: black;
     background-color: transparent;
     font-size: 40px;
+    margin-bottom: 4px;
     transition: border-width 0.1s linear;
-}
-
-.note-title::placeholder{
-    color: white;
 }
 
 .note-title:focus {
@@ -23,15 +23,27 @@
 }
 
 .note-text{
-    margin-top: 10px;
+    margin-top: 7px;
     width: 100%;
     outline: 0;
     border: 0;
     background-color: transparent;
     font-size: 20px;
-    height: 80vh;
+    height: 75vh;
+    resize: none;
 }
 
-.note-text::placeholder{
+.note-option{
+    display: inline;
+}
+
+.delete-note{
+    background-color: #FF6961;
+    color: white;
+}
+
+.cancel-delete-note{
+    margin-right: 10px;
+    background-color: #77dd77;
     color: white;
 }
