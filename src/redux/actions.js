@@ -7,6 +7,7 @@ export const addNote = () => ({
     payload: {
         id: ++localNoteId,
         title: "",
-        note: ""
+        note: "",
+        timestamp: new Date()
     }
 })

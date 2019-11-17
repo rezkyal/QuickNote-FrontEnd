@@ -11,7 +11,7 @@ const NoteList = ({notes}) => {
     <div className="body-note-list">
         {notes && notes.length
         ? notes.map((notes, index) => {
-            return <NoteCard key={notes.id} notes={notes} />;
+            return <NoteCard key={notes.id} data={notes} />;
             })
         : "List empty, create one by pressing Add New Note button!"}
     </div>
