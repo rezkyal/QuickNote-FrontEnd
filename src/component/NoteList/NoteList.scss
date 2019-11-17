@@ -1,0 +1,29 @@
+.note-list{
+    display: inline;
+    flex: 1;
+    padding: 20px 10px 10px;
+    background-color: #eeeeee
+}
+
+.header-note-list{
+    display: flex;
+    .child{
+        width: 100%
+    }
+}
+
+.add-note{
+    margin-left: 5px;
+    flex: 1;
+    background-color: #77dd77;
+}
+
+.search-field{
+    flex: 2;
+}
+
+.body-note-list{
+    margin-top: 10px;
+    height: 85vh;
+    overflow-y: scroll 
+}
