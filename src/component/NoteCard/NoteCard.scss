@@ -12,6 +12,11 @@
     }
     margin-bottom: 10px;
     border-radius: 5px;
+    p {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        width: 100%;
+    }
 }
 
 .note-card:hover{

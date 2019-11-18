@@ -17,11 +17,9 @@ class NoteLeftMenu extends React.Component {
 
     handleFilterChange = filterValue => {
         this.setState({ filterValue:filterValue.target.value })
-        console.log(filterValue.target.value)
     };
 
     handleAddNote = () => {
-        console.log('work')
         this.props.addNote();
     }
 
@@ -29,8 +27,8 @@ class NoteLeftMenu extends React.Component {
         const {filterValue} = this.state
         const maybeSpinner = filterValue ? <Spinner size={Icon.SIZE_STANDARD} /> : undefined;
         return(
-            <div className="note-list">
-                <p className="note-list-title">Note Group</p>
+            <div className="note-left-menu">
+                <p className="note-group-title">Note Group</p>
                 <div className="header-note-list">
                     <InputGroup
                         leftIcon="search"

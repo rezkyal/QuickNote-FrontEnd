@@ -1,7 +1,6 @@
 export const getNoteState = store => store.notes;
 
 export const getNoteList = (store) =>{
-    console.log(store)
     return (getNoteState(store) ? getNoteState(store).allIds : [])
 }
 

@@ -1,8 +1,9 @@
-import {ADD_NOTE, EDIT_NOTE, DELETE_NOTE} from '../actionTypes'
+import {ADD_NOTE, EDIT_NOTE, DELETE_NOTE, SELECT_NOTE} from '../actionTypes'
 
 const initialState = {
     allIds: [],
-    byIds: {}
+    byIds: {},
+    selectedIdNote: null
 }
 
 export default function(state=initialState, action) {
@@ -39,12 +40,25 @@ export default function(state=initialState, action) {
         }
         case DELETE_NOTE:{
             const {id} = action.payload;
-            let newAllIds = state.allIds.filter(val => val !== id)
-            let newByIds = state.byIds.filter(val => val !== state.byIds[id])
+            let newAllIds = state.allIds.filter(val => val !== id.id)
+            let newByIds = {}
+            Object.keys(state.byIds).forEach(key=>{
+                if (id.id !== parseInt(key)){
+                    newByIds[key] = state.byIds[key]
+                }
+            })
             return{
                 ...state,
                 allIds : newAllIds,
-                byIds: newByIds
+                byIds: newByIds,
+                selectedIdNote: null
+            }
+        }
+        case SELECT_NOTE:{
+            const {id} = action.payload;
+            return{
+                ...state,
+                selectedIdNote: id
             }
         }
         default:

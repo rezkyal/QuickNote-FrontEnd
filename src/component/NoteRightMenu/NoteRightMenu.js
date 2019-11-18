@@ -1,38 +1,91 @@
 import React from 'react'
-import './NoteRightMenu.scss'
-import Button from '../Button/Button'
 import {Popover,H5,Classes} from '@blueprintjs/core'
 
+import Button from '../Button/Button'
 
-export default class NoteRightMenu extends React.Component{
+import {editNote, deleteNote} from './../../redux/actions'
+import { connect } from "react-redux";
+
+import {getNoteById} from './../../redux/selectors'
+
+import {datetimeconverter} from './../../utilities'
+
+import './NoteRightMenu.scss'
+
+
+class NoteRightMenu extends React.Component{
+
+    handlerEditTitle(evt){
+        this.props.editNote({
+            id:this.props.note.id,
+            title:evt.target.value,
+            note:this.props.note.note,
+            timestamp:this.props.note.timestamp
+        })
+    }
+
+    handlerEditNote(evt){
+        this.props.editNote({
+            id:this.props.note.id,
+            title:this.props.note.title,
+            note:evt.target.value,
+            timestamp:this.props.note.timestamp
+        })
+    }
+
+    handlerDeleteNote(evt){
+        this.props.deleteNote({
+            id:this.props.note.id
+        })
+    }
+
     render(){
-        return(
-            <div className="main-frame">
-                <input placeholder="Title..." type="text" className="note-title" />
-                <p>Created: 17/11/2019 12:00 PM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Last edit: 17/11/2019 12:49 PM</p>
-                <textarea placeholder="Text..." className="note-text" />
-                <div className="note-option">
-                    <Popover
-                        popoverClassName={Classes.POPOVER_CONTENT_SIZING}
-                        position="auto"
-                    >
-                        <Button icon="trash" className="delete-note red-pastel-hoverable">Delete note</Button>
-                        <div>
-                            <H5>Confirm deletion</H5>
-                            <p>Are you sure you want to delete these note? You won't be able to recover them.</p>
-                            <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 15 }}>
-                                <Button className={"cancel-delete-note grey-pastel-hoverable "+Classes.POPOVER_DISMISS}>
-                                    Cancel
-                                </Button>
-                                <Button className="delete-note red-pastel-hoverable">
-                                    Delete
-                                </Button>
+        if (this.props.note.id !== null && this.props.note.id !== undefined){
+            return(
+                <div className="note-right-menu">
+                    <input placeholder="Title..." type="text" className="note-title" value={this.props.note.title} onChange={this.handlerEditTitle.bind(this)} />
+                    <p>Created: {datetimeconverter(this.props.note.timestamp)}</p>
+                    <textarea placeholder="Text..." className="note-text" value={this.props.note.note} onChange={this.handlerEditNote.bind(this)} />
+                    <div className="note-option">
+                        <Popover
+                            popoverClassName={Classes.POPOVER_CONTENT_SIZING}
+                            position="auto"
+                        >
+                            <Button icon="trash" className="delete-note red-pastel-hoverable">Delete note</Button>
+                            <div>
+                                <H5>Confirm deletion</H5>
+                                <p>Are you sure you want to delete these note? You won't be able to recover them.</p>
+                                <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 15 }}>
+                                    <Button className={"cancel-delete-note grey-pastel-hoverable "+Classes.POPOVER_DISMISS}>
+                                        Cancel
+                                    </Button>
+                                    <Button className="delete-note red-pastel-hoverable" onClick={this.handlerDeleteNote.bind(this)}>
+                                        Delete
+                                    </Button>
+                                </div>
                             </div>
-                        </div>
-                    </Popover>
-                    
+                        </Popover>
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        }
+        else{
+            return(
+                <div className="note-right-menu">
+                    <p>No note selected, select one from the list on the left!</p>
+                </div>
+            )
+        }
     }
 }
+
+const mapStateToProps  = state =>{
+    const selectedIdNote = state.notes.selectedIdNote
+    const note = getNoteById(state,selectedIdNote)
+    return {note}
+}
+
+export default connect(
+    mapStateToProps,
+    {editNote,deleteNote}    
+)(NoteRightMenu)

@@ -1,17 +1,20 @@
 import React from 'react'
-import './NoteList.scss'
-import '../NoteCard/NoteCard'
+
 import { connect } from "react-redux";
-import NoteCard from '../NoteCard/NoteCard';
 import {getNotes} from '../../redux/selectors'
+import {selectNote} from '../../redux/actions'
+
+import NoteCard from '../NoteCard/NoteCard';
+
+import './NoteList.scss'
 
 
-const NoteList = ({notes}) => {
+const NoteList = ({notes, selectedIdNote, selectNote}) => {
     return(
     <div className="body-note-list">
         {notes && notes.length
         ? notes.map((notes, index) => {
-            return <NoteCard key={notes.id} data={notes} />;
+            return <NoteCard selectedIdNote={selectedIdNote} key={notes.id} data={notes} onClick={()=>selectNote(notes.id)}/>;
             })
         : "List empty, create one by pressing Add New Note button!"}
     </div>
@@ -20,8 +23,9 @@ const NoteList = ({notes}) => {
 
 const mapStateToProps = state => {
     const notes = getNotes(state);
-    console.log(notes)
-    return {notes}
+    console.log(state)
+    const selectedIdNote = state.notes.selectedIdNote
+    return {notes, selectedIdNote}
 }
 
-export default connect(mapStateToProps)(NoteList);
+export default connect(mapStateToProps,{selectNote})(NoteList);

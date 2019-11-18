@@ -1,34 +1,25 @@
 import React from 'react'
 import { Card } from '@blueprintjs/core';
+
+import {datetimeconverter,ellipsis} from './../../utilities'
+
 import './NoteCard.scss'
 
 export default class NoteCard extends React.Component{
-    constructor(props){
-        super(props)
-    }
 
-    ellipsis(string){
-        return (string.length > 150) ? string.substr(0, 149) + '&hellip;' : string;
-    }
-
-    datetimeconverter(dt){
-        return dt.getDate() + "/"
-                + (dt.getMonth()+1)  + "/" 
-                + dt.getFullYear() + " @ "  
-                + dt.getHours() + ":"  
-                + dt.getMinutes()
-    }
-    
     render(){
+        console.log(this.props.selectedIdNote === this.props.data.id)
+        const className = (this.props.selectedIdNote === this.props.data.id) ? "note-card bg-black" : "note-card bg-dark-gray"
         return(
             <Card 
                 elevation={2} 
-                className="note-card bg-dark-gray" 
+                className={className}
                 interactive={true}
+                onClick={this.props.onClick}
             >
-                <p className="white-font title">{(this.props.data.title!=='') ? this.props.data.title : 'No Title...' }</p>
-                <p className="white-font time">Created: {this.datetimeconverter(this.props.data.timestamp)}&nbsp;&nbsp;&nbsp;Last edit: {this.datetimeconverter(this.props.data.timestamp)}</p>
-                <p className="white-font detail">{(this.props.data.note!=='') ? this.ellipsis(this.props.data.note) : "No Note..."}</p>
+                <p className="white-font title">{(this.props.data.title!=='') ? ellipsis(this.props.data.title,150) : 'No Title...' }</p>
+                <p className="white-font time">Created: {datetimeconverter(this.props.data.timestamp)}</p>
+                <p className="white-font detail">{(this.props.data.note!=='') ? ellipsis(this.props.data.note,300) : "No Note..."}</p>
             </Card>
         )
     }
