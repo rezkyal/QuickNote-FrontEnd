@@ -5,7 +5,9 @@ import Button from '../Button/Button'
 import NoteList from './../NoteList/NoteList'
 
 import { connect } from "react-redux";
-import {addNote} from './../../redux/actions'
+import {bindActionCreators} from "redux";
+
+import {addNoteFetch} from './../../redux/note/fetch'
 
 import './NoteLeftMenu.scss'
 
@@ -53,4 +55,8 @@ class NoteLeftMenu extends React.Component {
     }
 }
 
-export default connect(null,{addNote})(NoteLeftMenu)
+const mapDispatchToProps = dispatch=> bindActionCreators({
+    addNote: addNoteFetch
+},dispatch)
+
+export default connect(null,mapDispatchToProps)(NoteLeftMenu)

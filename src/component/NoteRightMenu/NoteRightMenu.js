@@ -3,10 +3,11 @@ import {Popover,H5,Classes} from '@blueprintjs/core'
 
 import Button from '../Button/Button'
 
-import {editNote, deleteNote} from './../../redux/actions'
+import {editNoteFetch, deleteNoteFetch} from './../../redux/note/fetch'
 import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
 
-import {getNoteById} from './../../redux/selectors'
+import {getNoteById} from './../../redux/note/selectors'
 
 import {datetimeconverter} from './../../utilities'
 
@@ -85,7 +86,12 @@ const mapStateToProps  = state =>{
     return {note}
 }
 
+const mapDispatchToProps = dispatch=> bindActionCreators({
+    editNote: editNoteFetch,
+    deleteNote: deleteNoteFetch
+},dispatch)
+
 export default connect(
     mapStateToProps,
-    {editNote,deleteNote}    
+    mapDispatchToProps
 )(NoteRightMenu)

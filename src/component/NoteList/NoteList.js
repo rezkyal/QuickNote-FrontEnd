@@ -1,8 +1,11 @@
 import React from 'react'
 
 import { connect } from "react-redux";
-import {getNotes} from '../../redux/selectors'
-import {selectNote} from '../../redux/actions'
+
+import {bindActionCreators} from "redux";
+
+import {getNotes} from '../../redux/note/selectors'
+import {selectNoteFetch} from '../../redux/note/fetch'
 
 import NoteCard from '../NoteCard/NoteCard';
 
@@ -28,4 +31,8 @@ const mapStateToProps = state => {
     return {notes, selectedIdNote}
 }
 
-export default connect(mapStateToProps,{selectNote})(NoteList);
+const mapDispatchToProps = dispatch => bindActionCreators({
+    selectNote: selectNoteFetch
+},dispatch)
+
+export default connect(mapStateToProps,mapDispatchToProps)(NoteList);

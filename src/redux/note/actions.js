@@ -1,11 +1,10 @@
 import {ADD_NOTE, EDIT_NOTE, DELETE_NOTE, SELECT_NOTE} from './actionTypes'
 
-let localNoteId = 0;
 
-export const addNote = () => ({
+export const addNote = (idNote) => ({
     type: ADD_NOTE,
     payload: {
-        id: ++localNoteId,
+        id: idNote,
         title: "",
         note: "",
         timestamp: new Date()

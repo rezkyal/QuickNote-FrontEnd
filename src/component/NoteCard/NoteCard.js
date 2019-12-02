@@ -8,7 +8,6 @@ import './NoteCard.scss'
 export default class NoteCard extends React.Component{
 
     render(){
-        console.log(this.props.selectedIdNote === this.props.data.id)
         const className = (this.props.selectedIdNote === this.props.data.id) ? "note-card bg-black" : "note-card bg-dark-gray"
         return(
             <Card 

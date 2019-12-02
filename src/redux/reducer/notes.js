@@ -1,4 +1,4 @@
-import {ADD_NOTE, EDIT_NOTE, DELETE_NOTE, SELECT_NOTE} from '../actionTypes'
+import {ADD_NOTE, EDIT_NOTE, DELETE_NOTE, SELECT_NOTE} from '../note/actionTypes'
 
 const initialState = {
     allIds: [],
