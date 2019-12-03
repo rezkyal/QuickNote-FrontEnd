@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import {bindActionCreators} from "redux";
 
 import {addNoteFetch} from './../../redux/note/fetch'
+import {getUser} from './../../redux/user/selectors'
 
 import './NoteLeftMenu.scss'
 
@@ -26,11 +27,12 @@ class NoteLeftMenu extends React.Component {
     }
 
     render(){
+        console.log(this.props.user)
         const {filterValue} = this.state
         const maybeSpinner = filterValue ? <Spinner size={Icon.SIZE_STANDARD} /> : undefined;
         return(
             <div className="note-left-menu">
-                <p className="note-group-title">Note Group</p>
+                <p className="note-group-title">Note Group - {this.props.user.username}</p>
                 <div className="header-note-list">
                     <InputGroup
                         leftIcon="search"
@@ -55,8 +57,13 @@ class NoteLeftMenu extends React.Component {
     }
 }
 
+const mapStateToProps  = state =>{
+    const user = getUser(state)
+    return {user}
+}
+
 const mapDispatchToProps = dispatch=> bindActionCreators({
     addNote: addNoteFetch
 },dispatch)
 
-export default connect(null,mapDispatchToProps)(NoteLeftMenu)
+export default connect(mapStateToProps,mapDispatchToProps)(NoteLeftMenu)

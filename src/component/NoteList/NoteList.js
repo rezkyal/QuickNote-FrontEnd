@@ -26,7 +26,6 @@ const NoteList = ({notes, selectedIdNote, selectNote}) => {
 
 const mapStateToProps = state => {
     const notes = getNotes(state);
-    console.log(state)
     const selectedIdNote = state.notes.selectedIdNote
     return {notes, selectedIdNote}
 }
