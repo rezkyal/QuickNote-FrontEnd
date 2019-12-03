@@ -4,19 +4,15 @@ import {
 } from "react-router-dom";
 
 import App from './component/App/App';
-import Loading from './component/Loading/Loading'
+import CreateUser from './component/CreateUser/CreateUser'
 import React from 'react';
-
 
 function Routing () {
     return(
         <div>
             <Switch>
-                <Route exact path={"/"}>
-                    <Loading message="Creating note"/>
-                </Route>
-                <Route path={"/:username"} component={App}>
-                </Route>
+                <Route exact path={"/"} component={CreateUser}/>
+                <Route path={"/:username"} component={App}/>
             </Switch>
         </div>
     )

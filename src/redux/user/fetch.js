@@ -24,3 +24,18 @@ export function changeUserFetch(username) {
         })
     }
 }
+
+export function createUsernameFetch() {
+    return (dispatch) => {
+        let url = apiurl+'api/user'
+        dispatch(changeUser("",false))
+        return axios.get(url)
+        .then(res=>{
+            let data = res.data;
+            dispatch(changeUser(data.Username,false))
+        })
+        .catch(err=>{
+            errorhandler(dispatch,err)
+        })
+    }
+}

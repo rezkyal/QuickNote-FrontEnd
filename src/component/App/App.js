@@ -8,45 +8,49 @@ import {getUser} from './../../redux/user/selectors'
 
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
+import LoadingScreen from '../LoadingScreen/LoadingScreen';
 
 
 class App extends React.Component{
   constructor(props) {
     super(props);
 
-    this.shouldComponentRender = this.shouldComponentRender.bind(this);
+    this.loadingState = this.loadingState.bind(this);
   }
 
-  shouldComponentRender() {
-        const {loading} = this.props;
-        if(this.pending === false) return false;
-        // more tests
-        return true;
+  loadingState() {
+    const {loading} = this.props;
+    if(loading === false) return false;
+    // more tests
+    return true;
   }
 
   componentDidMount(){
     const {match:{params},changeUser} = this.props;
-    console.log(this.props)
     changeUser(params.username);
   }
   
   render(){
+    if(this.loadingState()) return <LoadingScreen type="balls" message="Loading Note" />
+
+
     return (
       <div className="App">
         <Header/>
         <MainContainer/>
       </div>
     );
+    
   }
 }
 
 const mapStateToProps  = state =>{
   const user = getUser(state)
-  return {loading: user.loading}
+  return {user:user,loading: user.loading}
 }
 
 const mapDispatchToProps = dispatch=> bindActionCreators({
   changeUser: changeUserFetch,
 },dispatch)
 
-export default connect(null,mapDispatchToProps)(App);
+export default connect(mapStateToProps,mapDispatchToProps)(App);

@@ -27,7 +27,6 @@ class NoteLeftMenu extends React.Component {
     }
 
     render(){
-        console.log(this.props.user)
         const {filterValue} = this.state
         const maybeSpinner = filterValue ? <Spinner size={Icon.SIZE_STANDARD} /> : undefined;
         return(

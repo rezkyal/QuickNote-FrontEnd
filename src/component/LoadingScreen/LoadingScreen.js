@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactLoading from "react-loading";
 
-import './Loading.scss'
+import './LoadingScreen.scss'
 
 const Loading = (props)=>{
     
@@ -9,7 +9,7 @@ const Loading = (props)=>{
         <div className="splash-screen">
             <div className="splash-container">
                 <div className="loading-splash-icon">
-                    <ReactLoading type={"bars"} color="black" />
+                    <ReactLoading type={props.type} color="black" />
                 </div>
                 <br/>
                 <h3 className="loading-splash-text">
