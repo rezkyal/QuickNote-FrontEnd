@@ -1,24 +1,24 @@
-import {SET_ERROR,DELETE_ERROR} from '../error/actionTypes'
+import {SET_NOTIF,DELETE_NOTIF} from '../error/actionTypes'
 
 const initialState = {
-    error: "",
+    notif: "",
     type: ""
 }
 
 export default function(state=initialState,action){
     switch(action.type){
-        case SET_ERROR:{
-            const{error,type} = action.payload;
+        case SET_NOTIF:{
+            const{notif,type} = action.payload;
             return {
                 ...state,
-                error: error,
+                notif: notif,
                 type: type
             }
         }
-        case DELETE_ERROR:{
+        case DELETE_NOTIF:{
             return {
                 ...state,
-                error: "",
+                notif: "",
                 type: ""
             }
         }

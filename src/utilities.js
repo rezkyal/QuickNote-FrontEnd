@@ -10,3 +10,13 @@ export function datetimeconverter(dt){
 export function ellipsis(string,count){
     return (string.length > count) ? string.substr(0, count-1) + '...' : string;
 }
+
+export function createNotif(title,message){
+    return {
+        // uid: 'once-please', // you can specify your own uid if required
+        title: title,
+        message: message,
+        position: 'bl',
+        autoDismiss: 3
+      };
+}

@@ -1,7 +1,8 @@
 import {changeUser,loadingUser,finisihLoadingUser,changePassword,changeNewPassword,changeErrorPassword} from './actions'
 import {deleteAllNote} from '../note/actions'
 import {errorhandler} from '../error/apihandler'
-import {setError} from '../error/action'
+import Notifications from 'react-notification-system-redux';
+import {createNotif} from '../../utilities'
 import {apiurl} from '../../setting'
 import axios from 'axios';
 
@@ -18,7 +19,8 @@ export function changeUserFetch(username) {
                 hasPassword = data.hasPassword==="true" ? true : false
                 dispatch(changeUser(username,loggedin,hasPassword))
             }else{
-                dispatch(setError("Server error!","danger"))
+                let notif = createNotif("Server error!","Unknown error!")
+                dispatch(Notifications.error(notif))
             }
             dispatch(finisihLoadingUser())
         })
@@ -59,6 +61,8 @@ export function login(password){
                 dispatch(changeUser(data.username,true,true))
                 dispatch(changeErrorPassword(""))
                 dispatch(changePassword(""))
+                let notif = createNotif("Login","Login successful!")
+                dispatch(Notifications.success(notif))
             }else{
                 dispatch(changeErrorPassword("Wrong Password!"))
             }
@@ -79,6 +83,8 @@ export function logout(){
             if(data.status === "1"){
                 dispatch(changeUser(data.username,false,true))
                 dispatch(deleteAllNote())
+                let notif = createNotif("Logout","Logout successful!")
+                dispatch(Notifications.success(notif))
             }
         })
         .catch(err=>{
@@ -104,6 +110,8 @@ export function setPassword(password){
                 dispatch(changeUser(data.username,true,true))
                 dispatch(changeErrorPassword(""))
                 dispatch(changePassword(""))
+                let notif = createNotif("Set Password","Password set successful!")
+                dispatch(Notifications.success(notif))
             }
         })
         .catch(err=>{
@@ -132,15 +140,20 @@ export function changeOldPassword(oldPassword,newPassword){
                 dispatch(changeErrorPassword(""))
                 dispatch(changePassword(""))
                 dispatch(changeNewPassword(""))
+                let notif = createNotif("Change Password","Change password successful!")
+                dispatch(Notifications.success(notif))
             }
         })
         .catch(err=>{
             if (err.response.status === 400){
                 if(err.response.data.status==="0"){
                     dispatch(changeErrorPassword(err.response.data.message))
+                }else{
+                    errorhandler(dispatch,err)                    
                 }
+            }else{
+                errorhandler(dispatch,err)
             }
-            errorhandler(dispatch,err)
         })
     }
 }

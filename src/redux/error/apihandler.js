@@ -1,4 +1,6 @@
-import {setError} from './action'
+
+import {createNotif} from '../../utilities'
+import Notifications from 'react-notification-system-redux'
 
 export function errorhandler(dispatch,error){
     // Error 😨
@@ -11,7 +13,7 @@ export function errorhandler(dispatch,error){
         console.log(error.response.data);
         console.log(error.response.status);
         console.log(error.response.headers);
-        message = "Error! (Status: "+error.response.status+") "+error.response.data
+        message = "Error! (Status: "+error.response.status+"). "+error.response.data.message
     } else if (error.request) {
         /*
             * The request was made but no response was received, `error.request`
@@ -19,12 +21,12 @@ export function errorhandler(dispatch,error){
             * of http.ClientRequest in Node.js
             */
         console.log(error.request);
-        message = "Error! Connection unstable! "+error.request
+        message = "Connection error! try again later"
     } else {
         // Something happened in setting up the request and triggered an Error
         console.log('Error', error.message);
         message = "Error! "+error.message
     }
-    dispatch(setError(message,"danger"));
-    console.log(error);
+    let notif = createNotif("Connection error!",message)
+    dispatch(Notifications.error(notif))
 }

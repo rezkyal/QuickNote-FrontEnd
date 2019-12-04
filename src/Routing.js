@@ -5,6 +5,7 @@ import {
 
 import App from './component/App/App';
 import CreateUser from './component/CreateUser/CreateUser'
+import Notif from './Notif'
 import React from 'react';
 
 function Routing () {
@@ -14,6 +15,7 @@ function Routing () {
                 <Route exact path={"/"} component={CreateUser}/>
                 <Route path={"/:username"} component={App}/>
             </Switch>
+            <Notif/>
         </div>
     )
 }
