@@ -1,4 +1,4 @@
-import {CHANGE_USER,LOADING_USER} from './actionTypes'
+import {CHANGE_USER,LOADING_USER,FINISH_LOADING_USER} from './actionTypes'
 
 export const changeUser = (username,loggedin) =>({
     type: CHANGE_USER,
@@ -11,4 +11,8 @@ export const changeUser = (username,loggedin) =>({
 
 export const loadingUser = () =>({
     type: LOADING_USER
+})
+
+export const finisihLoadingUser = () =>({
+    type: FINISH_LOADING_USER
 })

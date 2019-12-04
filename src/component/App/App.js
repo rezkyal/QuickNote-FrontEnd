@@ -4,6 +4,7 @@ import MainContainer from './../MainContainer/MainContainer'
 import './App.scss';
 
 import {changeUserFetch} from './../../redux/user/fetch'
+
 import {getUser} from './../../redux/user/selectors'
 
 import { connect } from "react-redux";
@@ -31,7 +32,7 @@ class App extends React.Component{
   }
   
   render(){
-    if(this.loadingState()) return <LoadingScreen type="balls" message="Loading Note" />
+    if(this.loadingState()) return <LoadingScreen type="balls" message="Loading User" />
 
 
     return (
@@ -50,7 +51,7 @@ const mapStateToProps  = state =>{
 }
 
 const mapDispatchToProps = dispatch=> bindActionCreators({
-  changeUser: changeUserFetch,
+  changeUser: changeUserFetch
 },dispatch)
 
 export default connect(mapStateToProps,mapDispatchToProps)(App);

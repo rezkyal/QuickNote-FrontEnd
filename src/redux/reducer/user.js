@@ -1,9 +1,9 @@
-import {CHANGE_USER,LOADING_USER} from '../user/actionTypes'
+import {CHANGE_USER,LOADING_USER, FINISH_LOADING_USER} from '../user/actionTypes'
 
 const initialState = {
     username: "",
     loggedin: false,
-    loading: false
+    loading: true
 }
 
 export default function(state=initialState,action){
@@ -13,13 +13,19 @@ export default function(state=initialState,action){
             return {
                 ...state,
                 username: username,
-                loggedin: loggedin,
-                loading: false
+                loggedin: loggedin
             }
         }
         case LOADING_USER:{
             return {
+                ...state,
                 loading: true
+            }
+        }
+        case FINISH_LOADING_USER:{
+            return{
+                ...state,
+                loading: false
             }
         }
         default:

@@ -1,4 +1,4 @@
-import {changeUser,loadingUser} from './action'
+import {changeUser,loadingUser,finisihLoadingUser} from './action'
 import {errorhandler} from '../error/apihandler'
 import {setError} from '../error/action'
 import {apiurl} from '../../setting'
@@ -18,9 +18,11 @@ export function changeUserFetch(username) {
             }else{
                 dispatch(setError("Server error!","danger"))
             }
+            dispatch(finisihLoadingUser())
         })
         .catch(err=>{
             errorhandler(dispatch,err)
+            dispatch(finisihLoadingUser())
         })
     }
 }

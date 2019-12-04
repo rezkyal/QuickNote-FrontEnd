@@ -1,2 +1,3 @@
 export const CHANGE_USER = "CHANGE_USER"
 export const LOADING_USER = "LOADING_USER"
+export const FINISH_LOADING_USER = "FINISH_LOADING_USER"

@@ -1,9 +1,10 @@
-import {ADD_NOTE, EDIT_NOTE, DELETE_NOTE, SELECT_NOTE} from '../note/actionTypes'
+import {ADD_NOTE, EDIT_NOTE, DELETE_NOTE, SELECT_NOTE, LOAD_NOTE, LOADING_LIST_NOTE, FINISHED_LOADING_LIST_NOTE} from '../note/actionTypes'
 
 const initialState = {
     allIds: [],
     byIds: {},
-    selectedIdNote: null
+    selectedIdNote: null,
+    loading: true,
 }
 
 export default function(state=initialState, action) {
@@ -21,6 +22,33 @@ export default function(state=initialState, action) {
                         timestamp
                     }
                 }
+            }
+        }
+        case LOAD_NOTE:{
+            const {id,title,note,timestamp} = action.payload;
+            return {
+                ...state,
+                allIds: [...state.allIds, id],
+                byIds: {
+                    ...state.byIds,
+                    [id]: {
+                        title,
+                        note,
+                        timestamp
+                    }
+                }
+            }
+        }
+        case LOADING_LIST_NOTE:{
+            return {
+                ...state,
+                loading: true
+            }
+        }
+        case FINISHED_LOADING_LIST_NOTE:{
+            return {
+                ...state,
+                loading: false
             }
         }
         case EDIT_NOTE:{

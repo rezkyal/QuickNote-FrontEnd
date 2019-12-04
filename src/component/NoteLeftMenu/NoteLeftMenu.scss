@@ -21,3 +21,21 @@
 .search-field{
     flex: 2;
 }
+
+.splash-screen{
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    display: inline-flex;
+    text-align: center;
+}
+
+.splash-container{
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    display: flex;
+}

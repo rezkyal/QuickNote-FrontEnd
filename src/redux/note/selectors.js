@@ -1,4 +1,10 @@
-export const getNoteState = store => store.notes;
+export const getNoteState = (store) => {
+    return store.notes
+};
+
+export const getNoteLoading = (store) => {
+    return getNoteState(store).loading;
+}
 
 export const getNoteList = (store) =>{
     return (getNoteState(store) ? getNoteState(store).allIds : [])

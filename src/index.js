@@ -6,6 +6,9 @@ import {BrowserRouter} from 'react-router-dom';
 import Routing from './Routing';
 import store from "./redux/store";
 import * as serviceWorker from './serviceWorker';
+import axios from 'axios'
+
+axios.defaults.withCredentials = true
 
 
 

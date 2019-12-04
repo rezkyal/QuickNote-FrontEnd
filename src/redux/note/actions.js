@@ -1,4 +1,4 @@
-import {ADD_NOTE, EDIT_NOTE, DELETE_NOTE, SELECT_NOTE} from './actionTypes'
+import {ADD_NOTE, LOAD_NOTE, LOADING_LIST_NOTE, FINISHED_LOADING_LIST_NOTE, EDIT_NOTE, DELETE_NOTE, SELECT_NOTE} from './actionTypes'
 
 
 export const addNote = (idNote) => ({
@@ -9,6 +9,25 @@ export const addNote = (idNote) => ({
         note: "",
         timestamp: new Date()
     }
+})
+
+export const loadNote = (data) => ({
+    type: LOAD_NOTE,
+    payload: {
+        id: data.NoteID,
+        title: data.Title,
+        note: data.Note,
+        timestamp: new Date(data.CreatedOn)
+    }
+})
+
+export const loadingListNote = () => ({
+    type: LOADING_LIST_NOTE
+})
+
+
+export const finishedLoadingListNote = () => ({
+    type: FINISHED_LOADING_LIST_NOTE
 })
 
 export const editNote = (data) => ({
