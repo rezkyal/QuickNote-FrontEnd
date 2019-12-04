@@ -3,17 +3,19 @@ import {CHANGE_USER,LOADING_USER, FINISH_LOADING_USER} from '../user/actionTypes
 const initialState = {
     username: "",
     loggedin: false,
-    loading: true
+    loading: true,
+    hasPassword: false
 }
 
 export default function(state=initialState,action){
     switch(action.type){
         case CHANGE_USER:{
-            const{username,loggedin} = action.payload;
+            const{username,loggedin,hasPassword} = action.payload;
             return {
                 ...state,
                 username: username,
-                loggedin: loggedin
+                loggedin: loggedin,
+                hasPassword: hasPassword
             }
         }
         case LOADING_USER:{

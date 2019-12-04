@@ -68,10 +68,10 @@ export default function(state=initialState, action) {
         }
         case DELETE_NOTE:{
             const {id} = action.payload;
-            let newAllIds = state.allIds.filter(val => val !== id.id)
+            let newAllIds = state.allIds.filter(val => val !== id)
             let newByIds = {}
             Object.keys(state.byIds).forEach(key=>{
-                if (id.id !== parseInt(key)){
+                if (id !== parseInt(key)){
                     newByIds[key] = state.byIds[key]
                 }
             })

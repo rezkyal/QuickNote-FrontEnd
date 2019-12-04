@@ -7,7 +7,7 @@ import {editNoteFetch, deleteNoteFetch} from './../../redux/note/fetch'
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 
-import {getNoteById} from './../../redux/note/selectors'
+import {getNoteById,getNoteSelected} from './../../redux/note/selectors'
 
 import {datetimeconverter} from './../../utilities'
 
@@ -35,9 +35,7 @@ class NoteRightMenu extends React.Component{
     }
 
     handlerDeleteNote(evt){
-        this.props.deleteNote({
-            id:this.props.note.id
-        })
+        this.props.deleteNote(this.props.note.id)
     }
 
     render(){
@@ -81,7 +79,7 @@ class NoteRightMenu extends React.Component{
 }
 
 const mapStateToProps  = state =>{
-    const selectedIdNote = state.notes.selectedIdNote
+    const selectedIdNote = getNoteSelected(state)
     const note = getNoteById(state,selectedIdNote)
     return {note}
 }

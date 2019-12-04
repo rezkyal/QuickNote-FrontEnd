@@ -10,14 +10,22 @@ import { getUser } from '../../redux/user/selectors';
 
 
 class CreateUser extends React.Component{
+    constructor(props){
+        super(props)
+        this.historyHandler=this.historyHandler.bind(this)
+    }
+
     componentDidMount(){
         this.props.createUsername();
     }
 
+    historyHandler(){
+        this.props.history.push("/"+this.props.user.username)
+    }
 
     render(){
         if (this.props.user.username === "") return <LoadingScreen type="bars" message="Creating note"/>
-        this.props.history.push("/"+this.props.user.username)
+        this.historyHandler();
         return null;
     }
 }

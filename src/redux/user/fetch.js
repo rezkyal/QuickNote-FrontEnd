@@ -7,14 +7,15 @@ import axios from 'axios';
 export function changeUserFetch(username) {
     return (dispatch) => {
         dispatch(loadingUser())
-        let loggedin;
+        let loggedin,hasPassword;
         let url = apiurl+'api/user/initUser/'+username
         return axios.get(url)
         .then(res=>{
             let data = res.data;
             if (data.status === "1"){
                 loggedin = data.loggedin==="true" ? true : false
-                dispatch(changeUser(username,loggedin))
+                hasPassword = data.hasPassword==="true" ? true : false
+                dispatch(changeUser(username,loggedin,hasPassword))
             }else{
                 dispatch(setError("Server error!","danger"))
             }

@@ -2,6 +2,10 @@ export const getNoteState = (store) => {
     return store.notes
 };
 
+export const getNoteSelected = (store) => {
+    return store.notes.selectedIdNote
+}
+
 export const getNoteLoading = (store) => {
     return getNoteState(store).loading;
 }

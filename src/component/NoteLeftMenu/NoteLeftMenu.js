@@ -62,7 +62,7 @@ class NoteLeftMenu extends React.Component {
                     </div>
                     <br/>
                     <h3 className="loading-splash-text">
-                        Note locked!, input password first
+                        Note locked!, Unlock first!
                     </h3>
                 </div>
             </div>

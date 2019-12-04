@@ -2,6 +2,7 @@ import {addNote, editNote, deleteNote, selectNote, loadNote,loadingListNote,fini
 import {errorhandler} from '../error/apihandler'
 import {apiurl} from '../../setting'
 import axios from 'axios';
+import { DateTime } from 'luxon';
 
 export function addNoteFetch() {
     return (dispatch) => {
@@ -9,7 +10,7 @@ export function addNoteFetch() {
         return axios.get(url)
         .then(res=>{
             let data = res.data;
-            dispatch(addNote(data.NoteId))
+            dispatch(addNote(data.NoteID))
         })
         .catch(err=>{
             errorhandler(dispatch,err)
@@ -40,18 +41,57 @@ export function loadListNoteFetch(){
 
 export function editNoteFetch(data) {
     return (dispatch) => {
-        dispatch(editNote(data))
+        let url = apiurl+'api/note/updateOneNote'
+        var bodyFormData = new FormData();
+        
+        bodyFormData.set("noteid",data.id.toString())
+        bodyFormData.set("title",data.title)
+        bodyFormData.set("note",data.note)
+
+        return axios.post(url,bodyFormData,{headers: {'Content-Type': 'multipart/form-data' }})
+        .then(res=>{
+            dispatch(editNote(data))
+        }).catch(err=>{
+            errorhandler(dispatch,err)
+        })
     }
 }
 
-export function deleteNoteFetch(data){
+export function deleteNoteFetch(noteid){
     return (dispatch) => {
-        dispatch(deleteNote(data))
+        let url = apiurl+'api/note/deleteOneNote'
+        var bodyFormData = new FormData();
+
+        bodyFormData.set("noteid",noteid.toString())
+        return axios.post(url,bodyFormData,{headers: {'Content-Type': 'multipart/form-data' }})
+        .then(res=>{
+            dispatch(deleteNote(noteid))
+        }).catch(err=>{
+            errorhandler(dispatch,err)
+        })
     }
 }
 
-export function selectNoteFetch(data){
+export function selectNoteFetch(noteid){
     return (dispatch) => {
-        dispatch(selectNote(data))
+        let url = apiurl+'api/note/readOneNote'
+        var bodyFormData = new FormData();
+
+        bodyFormData.set("noteid",noteid.toString())
+
+        return axios.post(url,bodyFormData,{headers: {'Content-Type': 'multipart/form-data' }})
+        .then(res=>{
+            let data = res.data;
+            let note = {
+                id:data.NoteID,
+                title:data.Title,
+                note:data.Note,
+                timestamp:DateTime.fromISO(data.CreatedOn)
+            }
+            dispatch(editNote(note))
+            dispatch(selectNote(noteid))
+        }).catch(err=>{
+            errorhandler(dispatch,err)
+        })
     }
 }

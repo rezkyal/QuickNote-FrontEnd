@@ -1,5 +1,5 @@
 import {ADD_NOTE, LOAD_NOTE, LOADING_LIST_NOTE, FINISHED_LOADING_LIST_NOTE, EDIT_NOTE, DELETE_NOTE, SELECT_NOTE} from './actionTypes'
-
+import { DateTime } from 'luxon';
 
 export const addNote = (idNote) => ({
     type: ADD_NOTE,
@@ -7,7 +7,7 @@ export const addNote = (idNote) => ({
         id: idNote,
         title: "",
         note: "",
-        timestamp: new Date()
+        timestamp: DateTime.local()
     }
 })
 
@@ -17,7 +17,7 @@ export const loadNote = (data) => ({
         id: data.NoteID,
         title: data.Title,
         note: data.Note,
-        timestamp: new Date(data.CreatedOn)
+        timestamp: DateTime.fromISO(data.CreatedOn)
     }
 })
 
