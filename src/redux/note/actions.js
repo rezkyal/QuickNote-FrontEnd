@@ -1,4 +1,4 @@
-import {ADD_NOTE, LOAD_NOTE, LOADING_LIST_NOTE, FINISHED_LOADING_LIST_NOTE, EDIT_NOTE, DELETE_NOTE, SELECT_NOTE} from './actionTypes'
+import {ADD_NOTE, LOAD_NOTE, LOADING_LIST_NOTE, FINISHED_LOADING_LIST_NOTE, EDIT_NOTE, DELETE_NOTE, DELETE_ALL_NOTE, SELECT_NOTE} from './actionTypes'
 import { DateTime } from 'luxon';
 
 export const addNote = (idNote) => ({
@@ -45,6 +45,10 @@ export const deleteNote = (data) => ({
     payload: {
         id: data
     }
+})
+
+export const deleteAllNote = () => ({
+    type: DELETE_ALL_NOTE
 })
 
 export const selectNote = (data) => ({

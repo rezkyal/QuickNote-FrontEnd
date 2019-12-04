@@ -1,4 +1,4 @@
-import {ADD_NOTE, EDIT_NOTE, DELETE_NOTE, SELECT_NOTE, LOAD_NOTE, LOADING_LIST_NOTE, FINISHED_LOADING_LIST_NOTE} from '../note/actionTypes'
+import {ADD_NOTE, EDIT_NOTE, DELETE_NOTE, SELECT_NOTE, LOAD_NOTE, LOADING_LIST_NOTE, FINISHED_LOADING_LIST_NOTE, DELETE_ALL_NOTE} from '../note/actionTypes'
 
 const initialState = {
     allIds: [],
@@ -79,6 +79,14 @@ export default function(state=initialState, action) {
                 ...state,
                 allIds : newAllIds,
                 byIds: newByIds,
+                selectedIdNote: null
+            }
+        }
+        case DELETE_ALL_NOTE:{
+            return{
+                ...state,
+                allIds : [],
+                byIds: {},
                 selectedIdNote: null
             }
         }
