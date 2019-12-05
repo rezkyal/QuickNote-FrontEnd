@@ -5,7 +5,7 @@ import Button from './../Button/Button'
 import {getUser } from '../../redux/user/selectors';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { changeNewPassword, changePassword, changePopoverPassword } from '../../redux/user/actions';
+import { changeNewPassword, changePassword, changeConfirmPassword, changePopoverPassword } from '../../redux/user/actions';
 import { login, setPassword ,changeOldPassword} from '../../redux/user/fetch';
 import { loadListNoteFetch } from '../../redux/note/fetch';
 class PasswordButton extends React.Component{
@@ -18,8 +18,12 @@ class PasswordButton extends React.Component{
         this.props.changeNewPassword(evt.target.value)
     }
 
+    handlerEditConfirmPassword(evt){
+        this.props.changeConfirmPassword(evt.target.value)
+    }
+
     handlerSetPassword(){
-        this.props.setPassword(this.props.user.password)
+        this.props.setPassword(this.props.user.password,this.props.user.confirmPassword)
     }
 
     async handlerLoginUser(){
@@ -28,7 +32,7 @@ class PasswordButton extends React.Component{
     }
 
     handlerChangePassword(){
-        this.props.changeOldPassword(this.props.user.password,this.props.user.newPassword)
+        this.props.changeOldPassword(this.props.user.password,this.props.user.confirmPassword,this.props.user.newPassword)
     }
 
     handlerPopoverPassword(state){
@@ -50,6 +54,8 @@ class PasswordButton extends React.Component{
                     <label className={Classes.LABEL}>
                         Old Password:
                         <input type="password" value={this.props.user.password} onChange={this.handlerEditPassword.bind(this)} autoFocus={true} className={Classes.INPUT}/>
+                        Confirm Old Password:
+                        <input type="password" value={this.props.user.confirmPassword} onChange={this.handlerEditConfirmPassword.bind(this)} autoFocus={true} className={Classes.INPUT}/>
                         New Password:
                         <input type="password" value={this.props.user.newPassword} onChange={this.handlerEditNewPassword.bind(this)} className={Classes.INPUT}/>
                     </label>
@@ -61,7 +67,7 @@ class PasswordButton extends React.Component{
                 field = (
                     <label className={Classes.LABEL}>
                         Password:
-                        <input value={this.props.user.password} onChange={this.handlerEditPassword.bind(this)} autoFocus={true} className={Classes.INPUT} type="password" />
+                        <input type="password" value={this.props.user.password} onChange={this.handlerEditPassword.bind(this)} autoFocus={true} className={Classes.INPUT} />
                     </label>
                 )
                 passwordText = "Unlock"
@@ -72,7 +78,9 @@ class PasswordButton extends React.Component{
             field = (
                 <label className={Classes.LABEL}>
                     Password:
-                    <input value={this.props.user.password} onChange={this.handlerEditPassword.bind(this)} autoFocus={true} className={Classes.INPUT} type="password" />
+                    <input type="password" value={this.props.user.password} onChange={this.handlerEditPassword.bind(this)} autoFocus={true} className={Classes.INPUT} />
+                    Confirm Password:
+                    <input type="password" value={this.props.user.confirmPassword} onChange={this.handlerEditConfirmPassword.bind(this)} autoFocus={true} className={Classes.INPUT}/>
                 </label>
             )
             passwordText = "Set Password"
@@ -113,6 +121,7 @@ const mapStateToProps  = state =>{
 
 const mapDispatchToProps = dispatch=> bindActionCreators({
     changePassword: changePassword,
+    changeConfirmPassword: changeConfirmPassword,
     changeNewPassword: changeNewPassword,
     login: login,
     loadListNote: loadListNoteFetch,

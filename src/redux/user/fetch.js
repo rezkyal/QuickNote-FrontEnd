@@ -1,4 +1,4 @@
-import {changeUser,loadingUser,finisihLoadingUser,changePassword,changeNewPassword,changeErrorPassword, changePopoverPassword} from './actions'
+import {changeUser,loadingUser,finisihLoadingUser,changePassword,changeConfirmPassword,changeNewPassword,changeErrorPassword, changePopoverPassword} from './actions'
 import {deleteAllNote} from '../note/actions'
 import {errorhandler} from '../error/apihandler'
 import Notifications from 'react-notification-system-redux';
@@ -95,7 +95,7 @@ export function logout(){
     }
 }
 
-export function setPassword(password){
+export function setPassword(password,confirmPassword){
     return (dispatch) => {
         if (password===""){
             return dispatch(changeErrorPassword("Password can't be null!"))
@@ -104,6 +104,7 @@ export function setPassword(password){
         var bodyFormData = new FormData();
 
         bodyFormData.set("password",password)
+        bodyFormData.set("confirmpassword",confirmPassword)
 
         return axios.post(url,bodyFormData,{headers: {'Content-Type': 'multipart/form-data' }})
         .then(res=>{
@@ -112,9 +113,12 @@ export function setPassword(password){
                 dispatch(changeUser(data.username,true,true))
                 dispatch(changeErrorPassword(""))
                 dispatch(changePassword(""))
+                dispatch(changeConfirmPassword(""))
                 let notif = createNotif("Set Password","Password set successful!")
                 dispatch(Notifications.success(notif))
                 dispatch(changePopoverPassword(false))
+            }else{
+                dispatch(changeErrorPassword(data.message))
             }
         })
         .catch(err=>{
@@ -123,7 +127,7 @@ export function setPassword(password){
     }
 }
 
-export function changeOldPassword(oldPassword,newPassword){
+export function changeOldPassword(oldPassword,confirmPassword,newPassword){
     
     return (dispatch) => {
         if (newPassword===""){
@@ -133,6 +137,7 @@ export function changeOldPassword(oldPassword,newPassword){
         var bodyFormData = new FormData();
 
         bodyFormData.set("oldpassword",oldPassword)
+        bodyFormData.set("confirmpassword",confirmPassword)
         bodyFormData.set("newpassword",newPassword)
 
         return axios.post(url,bodyFormData,{headers: {'Content-Type': 'multipart/form-data' }})
@@ -142,10 +147,13 @@ export function changeOldPassword(oldPassword,newPassword){
                 dispatch(changeUser(data.username,true,true))
                 dispatch(changeErrorPassword(""))
                 dispatch(changePassword(""))
+                dispatch(changeConfirmPassword(""))
                 dispatch(changeNewPassword(""))
                 let notif = createNotif("Change Password","Change password successful!")
                 dispatch(Notifications.success(notif))
                 dispatch(changePopoverPassword(false))
+            }else{
+                dispatch(changeErrorPassword(data.message))
             }
         })
         .catch(err=>{
