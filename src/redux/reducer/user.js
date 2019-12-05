@@ -1,10 +1,11 @@
-import {CHANGE_USER,LOADING_USER, FINISH_LOADING_USER,CHANGE_PASSWORD,CHANGE_NEW_PASSWORD, CHANGE_ERROR_PASSWORD} from '../user/actionTypes'
+import {CHANGE_USER,LOADING_USER, FINISH_LOADING_USER,CHANGE_PASSWORD,CHANGE_NEW_PASSWORD, CHANGE_ERROR_PASSWORD, CHANGE_POPOVER_PASSWORD} from '../user/actionTypes'
 
 const initialState = {
     username: "",
     password: "",
     newPassword: "",
     passwordError: "",
+    passwordPopover: false,
     loggedin: false,
     loading: true,
     hasPassword: false
@@ -52,6 +53,13 @@ export default function(state=initialState,action){
             return{
                 ...state,
                 passwordError: error
+            }
+        }
+        case CHANGE_POPOVER_PASSWORD:{
+            const{nextState} = action.payload;
+            return{
+                ...state,
+                passwordPopover: nextState
             }
         }
         default:

@@ -15,22 +15,46 @@ import './NoteRightMenu.scss'
 
 
 class NoteRightMenu extends React.Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            title: "",
+            note: ""
+        }
+    }
 
-    handlerEditTitle(evt){
+    componentDidUpdate(prevProps){
+        if(this.props.note.id !== prevProps.note.id){
+            this.setState({
+                title: this.props.note.title,
+                note: this.props.note.note
+            })
+        }
+    }
+
+    async handlerEditTitle(evt){
+        let value=evt.target.value
         this.props.editNote({
             id:this.props.note.id,
-            title:evt.target.value,
-            note:this.props.note.note,
+            title:value,
+            note:this.state.note,
             timestamp:this.props.note.timestamp
+        })
+        this.setState({
+            title: value
         })
     }
 
-    handlerEditNote(evt){
+    async handlerEditNote(evt){
+        let value=evt.target.value
         this.props.editNote({
             id:this.props.note.id,
-            title:this.props.note.title,
-            note:evt.target.value,
+            title:this.state.title,
+            note:value,
             timestamp:this.props.note.timestamp
+        })
+        this.setState({
+            note: value
         })
     }
 
@@ -42,9 +66,20 @@ class NoteRightMenu extends React.Component{
         if (this.props.note.id !== null && this.props.note.id !== undefined){
             return(
                 <div className="note-right-menu">
-                    <input placeholder="Title..." type="text" className="note-title" value={this.props.note.title} onChange={this.handlerEditTitle.bind(this)} />
+                    <input 
+                        placeholder="Title..." 
+                        type="text" 
+                        className="note-title" 
+                        value={this.state.title} 
+                        onChange={this.handlerEditTitle.bind(this)}
+                    />
                     <p>Created: {datetimeconverter(this.props.note.timestamp)}</p>
-                    <textarea placeholder="Text..." className="note-text" value={this.props.note.note} onChange={this.handlerEditNote.bind(this)} />
+                    <textarea 
+                        placeholder="Text..." 
+                        className="note-text" 
+                        value={this.state.note} 
+                        onChange={this.handlerEditNote.bind(this)}
+                    />
                     <div className="note-option">
                         <Popover
                             popoverClassName={Classes.POPOVER_CONTENT_SIZING}

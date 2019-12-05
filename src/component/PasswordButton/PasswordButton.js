@@ -5,7 +5,7 @@ import Button from './../Button/Button'
 import {getUser } from '../../redux/user/selectors';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { changeNewPassword, changePassword } from '../../redux/user/actions';
+import { changeNewPassword, changePassword, changePopoverPassword } from '../../redux/user/actions';
 import { login, setPassword ,changeOldPassword} from '../../redux/user/fetch';
 import { loadListNoteFetch } from '../../redux/note/fetch';
 class PasswordButton extends React.Component{
@@ -29,6 +29,10 @@ class PasswordButton extends React.Component{
 
     handlerChangePassword(){
         this.props.changeOldPassword(this.props.user.password,this.props.user.newPassword)
+    }
+
+    handlerPopoverPassword(state){
+        this.props.changePopoverPassword(state)
     }
 
     render(){
@@ -81,6 +85,8 @@ class PasswordButton extends React.Component{
             <Popover
                     popoverClassName={Classes.POPOVER_CONTENT_SIZING}
                     position="auto"
+                    isOpen={this.props.user.passwordPopover}
+                    onInteraction={(state) => this.handlerPopoverPassword(state)}
             >
                 <Button icon="lock" className="white-font purple-pastel-hoverable">{passwordText}</Button>
                 <div key="input">
@@ -111,7 +117,8 @@ const mapDispatchToProps = dispatch=> bindActionCreators({
     login: login,
     loadListNote: loadListNoteFetch,
     setPassword : setPassword,
-    changeOldPassword: changeOldPassword
+    changeOldPassword: changeOldPassword,
+    changePopoverPassword: changePopoverPassword
 },dispatch)
 
 

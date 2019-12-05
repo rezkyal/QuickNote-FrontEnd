@@ -1,4 +1,4 @@
-import {changeUser,loadingUser,finisihLoadingUser,changePassword,changeNewPassword,changeErrorPassword} from './actions'
+import {changeUser,loadingUser,finisihLoadingUser,changePassword,changeNewPassword,changeErrorPassword, changePopoverPassword} from './actions'
 import {deleteAllNote} from '../note/actions'
 import {errorhandler} from '../error/apihandler'
 import Notifications from 'react-notification-system-redux';
@@ -63,6 +63,7 @@ export function login(password){
                 dispatch(changePassword(""))
                 let notif = createNotif("Login","Login successful!")
                 dispatch(Notifications.success(notif))
+                dispatch(changePopoverPassword(false))
             }else{
                 dispatch(changeErrorPassword("Wrong Password!"))
             }
@@ -85,6 +86,7 @@ export function logout(){
                 dispatch(deleteAllNote())
                 let notif = createNotif("Logout","Logout successful!")
                 dispatch(Notifications.success(notif))
+                
             }
         })
         .catch(err=>{
@@ -112,6 +114,7 @@ export function setPassword(password){
                 dispatch(changePassword(""))
                 let notif = createNotif("Set Password","Password set successful!")
                 dispatch(Notifications.success(notif))
+                dispatch(changePopoverPassword(false))
             }
         })
         .catch(err=>{
@@ -142,6 +145,7 @@ export function changeOldPassword(oldPassword,newPassword){
                 dispatch(changeNewPassword(""))
                 let notif = createNotif("Change Password","Change password successful!")
                 dispatch(Notifications.success(notif))
+                dispatch(changePopoverPassword(false))
             }
         })
         .catch(err=>{

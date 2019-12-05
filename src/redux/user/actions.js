@@ -1,4 +1,4 @@
-import {CHANGE_USER,LOADING_USER,FINISH_LOADING_USER,CHANGE_PASSWORD,CHANGE_NEW_PASSWORD, CHANGE_ERROR_PASSWORD} from './actionTypes'
+import {CHANGE_USER,LOADING_USER,FINISH_LOADING_USER,CHANGE_PASSWORD,CHANGE_NEW_PASSWORD, CHANGE_ERROR_PASSWORD,CHANGE_POPOVER_PASSWORD} from './actionTypes'
 
 export const changeUser = (username,loggedin,hasPassword) =>({
     type: CHANGE_USER,
@@ -20,6 +20,13 @@ export const changeNewPassword = (password) =>({
     type: CHANGE_NEW_PASSWORD,
     payload: {
         password: password
+    }
+})
+
+export const changePopoverPassword = (nextState)=>({
+    type: CHANGE_POPOVER_PASSWORD,
+    payload:{
+        nextState: nextState
     }
 })
 
