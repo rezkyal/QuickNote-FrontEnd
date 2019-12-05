@@ -2,6 +2,10 @@
   "name": "quick-note",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "npm" : "6.9.0",
+    "node" : "12.2.0"
+  }, 
   "dependencies": {
     "@blueprintjs/core": "^3.20.0",
     "@blueprintjs/icons": "^3.12.0",
