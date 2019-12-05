@@ -1,4 +1,4 @@
-import {addNote, editNote, deleteNote, selectNote, loadNote,loadingListNote,finishedLoadingListNote} from './actions'
+import {addNote, editNote, deleteNote, selectNote, loadNote,loadingListNote,finishedLoadingListNote,deleteAllNote} from './actions'
 import {errorhandler} from '../error/apihandler'
 import {apiurl} from '../../setting'
 import axios from 'axios';
@@ -92,6 +92,29 @@ export function selectNoteFetch(noteid){
             dispatch(selectNote(noteid))
         }).catch(err=>{
             errorhandler(dispatch,err)
+        })
+    }
+}
+
+export function searchNoteFetch(query){
+    return (dispatch) => {
+        dispatch(loadingListNote())
+        dispatch(deleteAllNote())
+        let url = apiurl+'api/note/readSearchNote'
+        var bodyFormData = new FormData();
+
+        bodyFormData.set("query",query.toLowerCase())
+
+        return axios.post(url,bodyFormData,{headers: {'Content-Type': 'multipart/form-data' }})
+        .then(res=>{
+            let data = res.data;
+            data.forEach(function (note,index){
+                dispatch(loadNote(note))
+            })
+            dispatch(finishedLoadingListNote())
+        }).catch(err=>{
+            errorhandler(dispatch,err)
+            dispatch(finishedLoadingListNote())
         })
     }
 }
