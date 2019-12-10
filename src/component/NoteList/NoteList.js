@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import {bindActionCreators} from "redux";
 
-import {getNotes} from '../../redux/note/selectors'
+import {getNotes,getNoteSocket} from '../../redux/note/selectors'
 import {selectNoteFetch} from '../../redux/note/fetch'
 
 import NoteCard from '../NoteCard/NoteCard';
@@ -14,7 +14,7 @@ import LoadingScreen from '../LoadingScreen/LoadingScreen';
 
 import './NoteList.scss'
 
-
+import {wsurl} from '../../setting'
 class NoteList extends React.Component{
 
     loadingState() {
@@ -24,8 +24,17 @@ class NoteList extends React.Component{
         return true;
     }
 
+    selectNoteHandler(noteid){
+        let {socket,selectNote} = this.props;
+        if(socket != null){
+            socket.close()
+        }
+        const newSocket = new WebSocket(wsurl+'api/note/ws/'+noteid)
+        selectNote(noteid,newSocket)
+    }
+
     render(){
-        let {notes,selectedIdNote,selectNote} = this.props
+        let {notes,selectedIdNote} = this.props
         if(this.loadingState()) {
             return (<LoadingScreen type="cubes" message="Loading Note" />)
         }else{
@@ -33,7 +42,7 @@ class NoteList extends React.Component{
                 <div className="body-note-list">
                     {notes && notes.length
                     ? notes.map((notes, index) => {
-                        return <NoteCard selectedIdNote={selectedIdNote} key={notes.id} data={notes} onClick={()=>selectNote(notes.id)}/>;
+                        return <NoteCard selectedIdNote={selectedIdNote} key={notes.id} data={notes} onClick={()=>this.selectNoteHandler(notes.id)}/>;
                         })
                     : "List empty, create one by pressing Add New Note button!"}
                 </div>
@@ -45,9 +54,10 @@ class NoteList extends React.Component{
 
 const mapStateToProps = state => {
     const notes = getNotes(state);
-    const loading = getNoteLoading(state)
-    const selectedIdNote = notes.selectedIdNote
-    return {notes, selectedIdNote,loading}
+    const socket = getNoteSocket(state)
+    const loading = getNoteLoading(state);
+    const selectedIdNote = notes.selectedIdNote;
+    return {notes, selectedIdNote,loading,socket}
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({

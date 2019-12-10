@@ -10,6 +10,10 @@ export const getNoteLoading = (store) => {
     return getNoteState(store).loading;
 }
 
+export const getNoteSocket = (store) => {
+    return getNoteState(store).socket;
+}
+
 export const getNoteList = (store) =>{
     return (getNoteState(store) ? getNoteState(store).allIds : [])
 }

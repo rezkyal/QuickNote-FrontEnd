@@ -1,5 +1,6 @@
 import {ADD_NOTE, LOAD_NOTE, LOADING_LIST_NOTE, FINISHED_LOADING_LIST_NOTE, EDIT_NOTE, DELETE_NOTE, DELETE_ALL_NOTE, SELECT_NOTE} from './actionTypes'
 import { DateTime } from 'luxon';
+import { EDIT_SOCKET } from './actionTypes';
 
 export const addNote = (idNote) => ({
     type: ADD_NOTE,
@@ -7,7 +8,8 @@ export const addNote = (idNote) => ({
         id: idNote,
         title: "",
         note: "",
-        timestamp: DateTime.local()
+        createdOn: DateTime.local(),
+        updatedOn: DateTime.local()
     }
 })
 
@@ -17,7 +19,8 @@ export const loadNote = (data) => ({
         id: data.NoteID,
         title: data.Title,
         note: data.Note,
-        timestamp: DateTime.fromISO(data.CreatedOn)
+        createdOn: DateTime.fromISO(data.CreatedOn),
+        updatedOn: DateTime.fromISO(data.UpdatedOn)
     }
 })
 
@@ -36,7 +39,8 @@ export const editNote = (data) => ({
         id: data.id,
         title: data.title,
         note: data.note,
-        timestamp: data.timestamp
+        createdOn: data.createdOn,
+        updatedOn: data.updatedOn
     }
 })
 
@@ -55,5 +59,12 @@ export const selectNote = (data) => ({
     type: SELECT_NOTE,
     payload: {
         id: data
+    }
+})
+
+export const editSocket = (data) => ({
+    type: EDIT_SOCKET,
+    payload:{
+        socket: data
     }
 })

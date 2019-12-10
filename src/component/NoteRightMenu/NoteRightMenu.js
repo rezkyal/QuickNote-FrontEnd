@@ -3,83 +3,29 @@ import {Popover,H5,Classes} from '@blueprintjs/core'
 
 import Button from '../Button/Button'
 
-import {editNoteFetch, deleteNoteFetch} from './../../redux/note/fetch'
+import {deleteNoteFetch} from './../../redux/note/fetch'
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 
-import {getNoteById,getNoteSelected} from './../../redux/note/selectors'
+import NoteMain from '../../component/NoteMain/NoteMain'
 
-import {datetimeconverter} from './../../utilities'
+import {getNoteSelected} from './../../redux/note/selectors'
 
 import './NoteRightMenu.scss'
 
 
+
 class NoteRightMenu extends React.Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            title: "",
-            note: ""
-        }
-    }
-
-    componentDidUpdate(prevProps){
-        if(this.props.note.id !== prevProps.note.id){
-            this.setState({
-                title: this.props.note.title,
-                note: this.props.note.note
-            })
-        }
-    }
-
-    async handlerEditTitle(evt){
-        let value=evt.target.value
-        this.props.editNote({
-            id:this.props.note.id,
-            title:value,
-            note:this.state.note,
-            timestamp:this.props.note.timestamp
-        })
-        this.setState({
-            title: value
-        })
-    }
-
-    async handlerEditNote(evt){
-        let value=evt.target.value
-        this.props.editNote({
-            id:this.props.note.id,
-            title:this.state.title,
-            note:value,
-            timestamp:this.props.note.timestamp
-        })
-        this.setState({
-            note: value
-        })
-    }
 
     handlerDeleteNote(evt){
-        this.props.deleteNote(this.props.note.id)
+        this.props.deleteNote(this.props.selectedIdNote)
     }
 
     render(){
-        if (this.props.note.id !== null && this.props.note.id !== undefined){
+        if (this.props.selectedIdNote !== null && this.props.selectedIdNote !== undefined){
             return(
                 <div className="note-right-menu">
-                    <input 
-                        placeholder="Title..." 
-                        type="text" 
-                        className="note-title" 
-                        value={this.state.title} 
-                        onChange={this.handlerEditTitle.bind(this)}
-                    />
-                    <p>Created: {datetimeconverter(this.props.note.timestamp)}</p>
-                    <textarea 
-                        placeholder="Text..." 
-                        className="note-text" 
-                        value={this.state.note} 
-                        onChange={this.handlerEditNote.bind(this)}
-                    />
+                    <NoteMain/>
                     <div className="note-option">
                         <Popover
                             popoverClassName={Classes.POPOVER_CONTENT_SIZING}
@@ -115,12 +61,10 @@ class NoteRightMenu extends React.Component{
 
 const mapStateToProps  = state =>{
     const selectedIdNote = getNoteSelected(state)
-    const note = getNoteById(state,selectedIdNote)
-    return {note}
+    return {selectedIdNote}
 }
 
 const mapDispatchToProps = dispatch=> bindActionCreators({
-    editNote: editNoteFetch,
     deleteNote: deleteNoteFetch
 },dispatch)
 

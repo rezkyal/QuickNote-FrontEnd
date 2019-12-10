@@ -1,16 +1,17 @@
-import {ADD_NOTE, EDIT_NOTE, DELETE_NOTE, SELECT_NOTE, LOAD_NOTE, LOADING_LIST_NOTE, FINISHED_LOADING_LIST_NOTE, DELETE_ALL_NOTE} from '../note/actionTypes'
+import {ADD_NOTE, EDIT_NOTE, DELETE_NOTE, SELECT_NOTE, LOAD_NOTE, LOADING_LIST_NOTE, FINISHED_LOADING_LIST_NOTE, DELETE_ALL_NOTE, EDIT_SOCKET} from '../note/actionTypes'
 
 const initialState = {
     allIds: [],
     byIds: {},
     selectedIdNote: null,
     loading: true,
+    socket: null
 }
 
 export default function(state=initialState, action) {
     switch(action.type){
         case ADD_NOTE:{
-            const {id,title,note,timestamp} = action.payload;
+            const {id,title,note,createdOn,updatedOn} = action.payload;
             return {
                 ...state,
                 allIds: [...state.allIds, id],
@@ -19,13 +20,14 @@ export default function(state=initialState, action) {
                     [id]: {
                         title,
                         note,
-                        timestamp
+                        createdOn,
+                        updatedOn
                     }
                 }
             }
         }
         case LOAD_NOTE:{
-            const {id,title,note,timestamp} = action.payload;
+            const {id,title,note,createdOn,updatedOn} = action.payload;
             return {
                 ...state,
                 allIds: [...state.allIds, id],
@@ -34,7 +36,8 @@ export default function(state=initialState, action) {
                     [id]: {
                         title,
                         note,
-                        timestamp
+                        createdOn,
+                        updatedOn
                     }
                 }
             }
@@ -52,7 +55,7 @@ export default function(state=initialState, action) {
             }
         }
         case EDIT_NOTE:{
-            const {id,title,note,timestamp} = action.payload;
+            const {id,title,note,createdOn,updatedOn} = action.payload;
             return{
                 ...state,
                 byIds: {
@@ -61,7 +64,8 @@ export default function(state=initialState, action) {
                         ...state.byIds[id],
                         title,
                         note,
-                        timestamp
+                        createdOn,
+                        updatedOn
                     }
                 }
             }
@@ -95,6 +99,13 @@ export default function(state=initialState, action) {
             return{
                 ...state,
                 selectedIdNote: id
+            }
+        }
+        case EDIT_SOCKET:{
+            const {socket} = action.payload;
+            return{
+                ...state,
+                socket: socket
             }
         }
         default:

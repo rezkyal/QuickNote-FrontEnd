@@ -1,0 +1,3 @@
+search bar load
+mobile view
+update time
