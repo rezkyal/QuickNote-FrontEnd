@@ -1,3 +1,4 @@
-search bar load
-mobile view
-update time
+responsive
+interact 2 note at the same time
+
+

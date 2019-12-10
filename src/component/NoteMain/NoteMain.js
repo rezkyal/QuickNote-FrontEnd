@@ -66,7 +66,7 @@ class NoteMain extends React.Component{
             function(){
                 socket.send(JSON.stringify(jsondata))
             }
-            ,500
+            ,750
         )
         this.setState({timeout})
     }
