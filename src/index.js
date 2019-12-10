@@ -7,6 +7,8 @@ import Routing from './Routing';
 import store from "./redux/store";
 import * as serviceWorker from './serviceWorker';
 import axios from 'axios'
+import HttpsRedirect from 'react-https-redirect';
+
 
 axios.defaults.withCredentials = true
 
@@ -14,9 +16,11 @@ axios.defaults.withCredentials = true
 
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter>
-            <Routing/>
-        </BrowserRouter>
+        <HttpsRedirect>
+            <BrowserRouter>
+                <Routing/>
+            </BrowserRouter>
+        </HttpsRedirect>
     </Provider>,
     document.getElementById('root')
 );
