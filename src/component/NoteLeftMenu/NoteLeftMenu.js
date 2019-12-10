@@ -18,7 +18,8 @@ import { getNoteLoading } from '../../redux/note/selectors';
 
 class NoteLeftMenu extends React.Component {
     state = {
-        query:""
+        query:"",
+        timeout:null
     }
 
     loggedIn(){
@@ -32,9 +33,18 @@ class NoteLeftMenu extends React.Component {
     }
 
     handleFilterChange = evt => {
+        let {timeout} = this.state
+        const {searchNote} = this.props
+        if (timeout != null) clearTimeout(timeout)
         let query = evt.target.value
-        this.props.searchNote(query)
-        this.setState({ query })
+        timeout = setTimeout(
+            function(){
+                searchNote(query)
+            }
+            ,500
+        )
+        
+        this.setState({ query ,timeout})
     };
 
     handleAddNote = () => {
