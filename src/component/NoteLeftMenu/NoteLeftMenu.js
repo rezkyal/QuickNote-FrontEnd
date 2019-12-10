@@ -82,7 +82,7 @@ class NoteLeftMenu extends React.Component {
                         disabled={loading}
                         onClick={this.handleAddNote.bind(this)}
                     >
-                        Add new note
+                        Add note
                     </Button>
                 </div>
                 {content}

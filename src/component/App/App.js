@@ -3,6 +3,13 @@ import Header from './../Header/Header'
 import MainContainer from './../MainContainer/MainContainer'
 import './App.scss';
 
+import {getNoteSidebar} from '../../redux/note/selectors'
+import {toggleSidebarHandler} from '../Header/Header'
+import NoteLeftMenu from '../NoteLeftMenu/NoteLeftMenu'
+import { toggleSidebar } from '../../redux/note/actions';
+
+import MediaQuery from 'react-responsive'
+
 import {changeUserFetch} from './../../redux/user/fetch'
 
 import {getUser} from './../../redux/user/selectors'
@@ -11,6 +18,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import LoadingScreen from '../LoadingScreen/LoadingScreen';
 
+import Sidebar from "react-sidebar";
 
 class App extends React.Component{
   constructor(props) {
@@ -32,14 +40,31 @@ class App extends React.Component{
   }
   
   render(){
+    const {sidebar,toggleSidebar} = this.props;
     if(this.loadingState()) return <LoadingScreen type="balls" message="Loading User" />
 
-
     return (
-      <div className="App">
-        <Header/>
-        <MainContainer/>
-      </div>
+      <>
+        <MediaQuery maxWidth={1224} maxDeviceWidth={1224}>
+          <Sidebar
+              sidebar={<NoteLeftMenu/>}
+              open={sidebar}
+              onSetOpen={() => toggleSidebarHandler(sidebar,toggleSidebar)}
+              styles={{ sidebar: { background: "white" } }}
+          >
+            <div className="App">
+              <Header/>
+              <MainContainer/>
+            </div>
+          </Sidebar>
+        </MediaQuery>
+        <MediaQuery minWidth={1225} minDeviceWidth={1225}>
+          <div className="App">
+            <Header/>
+            <MainContainer/>
+          </div>
+        </MediaQuery>
+      </>
     );
     
   }
@@ -47,11 +72,14 @@ class App extends React.Component{
 
 const mapStateToProps  = state =>{
   const user = getUser(state)
-  return {user:user,loading: user.loading}
+
+  let sidebar = getNoteSidebar(state)
+  return {user:user,loading: user.loading,sidebar}
 }
 
 const mapDispatchToProps = dispatch=> bindActionCreators({
-  changeUser: changeUserFetch
+  changeUser: changeUserFetch,
+  toggleSidebar: toggleSidebar
 },dispatch)
 
 export default connect(mapStateToProps,mapDispatchToProps)(App);

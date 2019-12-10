@@ -1,5 +1,13 @@
+$standart-height: 768px;
+$fullhd-height: 1080px;
+
 .body-note-list{
     margin-top: 10px;
-    height: 85vh;
+    // @media screen and (max-height: $fullhd-height){
+        height: 83vh;        
+    // }
+    @media screen and (max-height: $standart-height) {
+        height: 75vh;
+    }
     overflow-y: auto;
 }

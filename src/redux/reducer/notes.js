@@ -1,11 +1,12 @@
-import {ADD_NOTE, EDIT_NOTE, DELETE_NOTE, SELECT_NOTE, LOAD_NOTE, LOADING_LIST_NOTE, FINISHED_LOADING_LIST_NOTE, DELETE_ALL_NOTE, EDIT_SOCKET} from '../note/actionTypes'
+import {ADD_NOTE, EDIT_NOTE, DELETE_NOTE, SELECT_NOTE, LOAD_NOTE, LOADING_LIST_NOTE, FINISHED_LOADING_LIST_NOTE, DELETE_ALL_NOTE, EDIT_SOCKET, TOGGLE_SIDEBAR} from '../note/actionTypes'
 
 const initialState = {
     allIds: [],
     byIds: {},
     selectedIdNote: null,
     loading: true,
-    socket: null
+    socket: null,
+    sidebar: false,
 }
 
 export default function(state=initialState, action) {
@@ -106,6 +107,13 @@ export default function(state=initialState, action) {
             return{
                 ...state,
                 socket: socket
+            }
+        }
+        case TOGGLE_SIDEBAR:{
+            const {sidebar} = action.payload;
+            return{
+                ...state,
+                sidebar: sidebar
             }
         }
         default:

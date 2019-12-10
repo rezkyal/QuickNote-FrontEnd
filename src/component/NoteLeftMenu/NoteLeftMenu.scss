@@ -1,8 +1,11 @@
 .note-left-menu{
-    display: inline;
-    width: 35%;
+    width: 256px;
     padding: 20px 10px 10px;
-    background-color: white;
+    @media screen and (min-width:1224px){
+        display: inline;
+        width: 35%;
+        background-color: white;   
+    }
 }
 
 .header-note-list{

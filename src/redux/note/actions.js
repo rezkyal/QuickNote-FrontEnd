@@ -1,4 +1,4 @@
-import {ADD_NOTE, LOAD_NOTE, LOADING_LIST_NOTE, FINISHED_LOADING_LIST_NOTE, EDIT_NOTE, DELETE_NOTE, DELETE_ALL_NOTE, SELECT_NOTE} from './actionTypes'
+import {ADD_NOTE, LOAD_NOTE, LOADING_LIST_NOTE, FINISHED_LOADING_LIST_NOTE, EDIT_NOTE, DELETE_NOTE, DELETE_ALL_NOTE, SELECT_NOTE,TOGGLE_SIDEBAR} from './actionTypes'
 import { DateTime } from 'luxon';
 import { EDIT_SOCKET } from './actionTypes';
 
@@ -66,5 +66,12 @@ export const editSocket = (data) => ({
     type: EDIT_SOCKET,
     payload:{
         socket: data
+    }
+})
+
+export const toggleSidebar = (data) => ({
+    type: TOGGLE_SIDEBAR,
+    payload:{
+        sidebar: data
     }
 })

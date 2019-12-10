@@ -60,8 +60,8 @@ class PasswordButton extends React.Component{
                         <input type="password" value={this.props.user.newPassword} onChange={this.handlerEditNewPassword.bind(this)} className={Classes.INPUT}/>
                     </label>
                 )
-                passwordText = "Change Password"
-                confirmButton = "Change"
+                passwordText = "Change"
+                confirmButton = "Change Password"
                 action = this.handlerChangePassword
             }else{
                 field = (
@@ -83,11 +83,14 @@ class PasswordButton extends React.Component{
                     <input type="password" value={this.props.user.confirmPassword} onChange={this.handlerEditConfirmPassword.bind(this)} autoFocus={true} className={Classes.INPUT}/>
                 </label>
             )
-            passwordText = "Set Password"
-            confirmButton = "Set"
+            passwordText = "Set"
+            confirmButton = "Set Password"
             action = this.handlerSetPassword
         }
 
+        if (window.innerWidth <= 1224){
+            passwordText=""
+        }
 
         return(
             <Popover

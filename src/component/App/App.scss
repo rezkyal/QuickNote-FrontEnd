@@ -1,7 +1,13 @@
 .App {
   background: #eeeeee;
+  @media screen and (max-width: 1224px){
+    padding: 30px 10px 20px;
+  }
+  @media screen and (min-width: 1225px){
+    height: 100%;
+  }
   padding: 30px 100px 20px;
-  height: 100%;
+
 }
 
 .white-font{

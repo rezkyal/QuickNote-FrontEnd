@@ -1,3 +1,7 @@
+$standart-height: 768px;
+$fullhd-height: 1080px;
+$mobile-width: 1224px;
+
 .note-title{
     width: 100%;
     outline: 0;
@@ -20,6 +24,14 @@
     border: 0;
     background-color: transparent;
     font-size: 20px;
-    height: 75vh;
     resize: none;
+    // @media screen and (max-height: $fullhd-height){
+        height: 75vh;        
+    // }
+    @media screen and (max-height: $standart-height) {
+        height: 65vh;
+    }
+    @media screen and (max-width: $mobile-width){
+        height: 50vh;
+    }
 }
