@@ -1,4 +1,3 @@
-responsive
 interact 2 note at the same time
-
+F12 screen ilang
 

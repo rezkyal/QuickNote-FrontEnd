@@ -10,7 +10,7 @@ import { logout } from '../../redux/user/fetch';
 import { toggleSidebar } from '../../redux/note/actions';
 
 import { useMediaQuery } from 'react-responsive'
-import {isTabletOrMobile, isTabletOrMobileDevice} from '../../mediaquery';
+import {isTabletOrMobile} from '../../mediaquery';
 
 export const toggleSidebarHandler = (sidebar,toggleSidebar) =>{
     toggleSidebar(!sidebar)
@@ -19,7 +19,6 @@ export const toggleSidebarHandler = (sidebar,toggleSidebar) =>{
 const Header = ({user,logout,sidebar,toggleSidebar}) =>{
 
     const isTabletOrMobileQuery = useMediaQuery({query: isTabletOrMobile});
-    const isTabletOrMobileDeviceQuery = useMediaQuery({query: isTabletOrMobileDevice});
 
     let logoutbutton=null;
     let logoutText="Logout";
@@ -36,10 +35,10 @@ const Header = ({user,logout,sidebar,toggleSidebar}) =>{
     }
     return (
     <header className="header">
-        {isTabletOrMobileQuery && isTabletOrMobileDeviceQuery &&
+        {isTabletOrMobileQuery &&
             <>
                 <span>
-                    <Button onClick={() => toggleSidebarHandler(sidebar,toggleSidebar)} icon="list" className="white-font purple-pastel-hoverable">List</Button>
+                    <Button onClick={() => toggleSidebarHandler(sidebar,toggleSidebar)} icon="list" className="white-font purple-pastel-hoverable"></Button>
                 </span>
             </>
         }

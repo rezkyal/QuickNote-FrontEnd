@@ -45,7 +45,13 @@ class App extends React.Component{
 
     return (
       <>
-        <MediaQuery maxWidth={1224} maxDeviceWidth={1224}>
+        <MediaQuery minWidth={1224}>
+          <div className="App">
+            <Header/>
+            <MainContainer/>
+          </div>
+        </MediaQuery>
+        <MediaQuery maxWidth={1224}>
           <Sidebar
               sidebar={<NoteLeftMenu/>}
               open={sidebar}
@@ -57,12 +63,6 @@ class App extends React.Component{
               <MainContainer/>
             </div>
           </Sidebar>
-        </MediaQuery>
-        <MediaQuery minWidth={1225} minDeviceWidth={1225}>
-          <div className="App">
-            <Header/>
-            <MainContainer/>
-          </div>
         </MediaQuery>
       </>
     );
