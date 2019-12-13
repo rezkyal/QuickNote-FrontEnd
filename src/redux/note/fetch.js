@@ -21,6 +21,7 @@ export function addNoteFetch() {
 
 export function loadListNoteFetch(){
     return (dispatch) => {
+        dispatch(deleteAllNote())
         dispatch(loadingListNote())
         let url = apiurl+'api/note/readAllNote'
         return axios.get(url)
