@@ -1,3 +1,16 @@
+## QuikNote App
+Check it out <a href="https://quiknote.herokuapp.com">here</a>
+
+
+A simple group note with password + search, and custom url naming system
+
+The main motivation is to learn golang in basic and learn any state management in react
+
+Backed with postgreSQL in DB, golang in backend (gin, gorm, gorilla), react in frontend (blueprint.js, redux, axios and many other dependencies (you can check the dependencies in my github)), implementing websocket when editing the note, and deploy it in heroku
+---------
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
