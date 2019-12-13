@@ -1,5 +1,4 @@
-<p align="center"><img src="https://github.com/rezkyal/QuickNote-FrontEnd/blob/master/public/android-chrome-512x512.png
-" width="400"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/rezkyal/QuickNote-FrontEnd/master/public/android-chrome-512x512.png" width="400"></p>
 
 ## QuikNote App
 
